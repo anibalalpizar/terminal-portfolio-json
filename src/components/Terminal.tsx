@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Command, commands, portfolioData } from "@/lib/data";
+import { Command } from "@/types";
 import { TitleBar } from "./TitleBar";
 import { CommandLine } from "./CommandLine";
 import { TerminalOutput } from "./TerminalOutput";
+import { useTheme } from "@/hooks/useTheme";
+import portfolioData from "@/data/portfolio.json";
+import commands from "@/data/commands.json";
 
 export function Terminal() {
   const [input, setInput] = useState("");
@@ -14,6 +17,7 @@ export function Terminal() {
   ]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const { theme, handleThemeChange } = useTheme();
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,10 +32,10 @@ export function Terminal() {
   }, [history]);
 
   const handleCommand = (cmd: string) => {
-    const trimmedCmd = cmd.trim().toLowerCase() as Command;
+    const [command, ...args] = cmd.trim().toLowerCase().split(" ");
     let output: string[] = [];
 
-    switch (trimmedCmd) {
+    switch (command as Command) {
       case "about":
         output = [portfolioData.bio];
         break;
@@ -53,6 +57,10 @@ export function Terminal() {
           `→ GitHub: ${portfolioData.socialLinks.github}`,
           `→ LinkedIn: ${portfolioData.socialLinks.linkedin}`,
         ];
+        break;
+      case "theme":
+        const [themeOutput] = handleThemeChange(args[0]);
+        output = themeOutput;
         break;
       case "help":
         output = [
@@ -104,20 +112,25 @@ export function Terminal() {
   };
 
   return (
-    <div className="mx-auto max-w-3xl overflow-hidden rounded-lg shadow-2xl">
+    <div className="mx-auto max-w-3xl overflow-hidden rounded-lg shadow-2xl bg-opacity-80 backdrop-blur-sm">
       <TitleBar />
       <div
         ref={terminalRef}
-        className="h-[80vh] overflow-y-auto bg-[#1E1E1E] p-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20"
+        style={{
+          background: `${theme.background}CC`,
+          color: theme.foreground,
+        }}
+        className="h-[80vh] overflow-y-auto p-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/20"
         onClick={() => inputRef.current?.focus()}
       >
-        <TerminalOutput history={history} />
+        <TerminalOutput history={history} theme={theme} />
         <CommandLine
           input={input}
           onInputChange={setInput}
           onSubmit={handleSubmit}
           onKeyDown={handleKeyDown}
           inputRef={inputRef}
+          theme={theme}
         />
       </div>
     </div>
