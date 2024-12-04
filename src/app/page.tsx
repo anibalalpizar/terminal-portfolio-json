@@ -1,9 +1,13 @@
-import { Terminal } from '@/components/Terminal';
+import { Terminal } from "@/components/Terminal";
+import { Background } from "@/components/Background";
 
 export default function Home() {
   return (
-    <main className="container mx-auto p-4 pt-8">
-      <Terminal />
-    </main>
+    <>
+      <Background />
+      <main className="container mx-auto p-4 pt-8 relative z-10">
+        <Terminal />
+      </main>
+    </>
   );
 }
