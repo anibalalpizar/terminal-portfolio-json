@@ -1,0 +1,38 @@
+{
+  "name": "Aníbal Alpízar",
+  "bio": "A passionate web developer specializing in frontend development.",
+  "skills": [
+    "JavaScript",
+    "React",
+    "Node.js",
+    "TypeScript",
+    "Next.js",
+    "TailwindCSS"
+  ],
+  "projects": [
+    {
+      "name": "Json to Xml converter",
+      "description": "Convert JSON to XML easily with modern UI tools.",
+      "link": "https://github.com/anibalalpizar/json-to-xml-converter"
+    },
+    {
+      "name": "Costa Rica API",
+      "description": "API with information about Costa Rica.",
+      "link": "https://github.com/anibalalpizar/api-geo-cr"
+    },
+    {
+      "name": "Nextjs Shadcn Landing",
+      "description": "Landing page template built with Next.js and TailwindCSS.",
+      "link": "https://nextjs-shadcn-landing.vercel.app"
+    },
+    {
+      "name": "Env Protector",
+      "description": "A lightweight TypeScript package for validating environment variables.",
+      "link": "https://www.npmjs.com/package/env-protector"
+    }
+  ],
+  "socialLinks": {
+    "github": "https://github.com/anibalalpizar",
+    "linkedin": "https://linkedin.com/in/anibalalpizar"
+  }
+}
