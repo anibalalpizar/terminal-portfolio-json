@@ -3,8 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-rgb: 28, 28, 28;
+  --foreground-rgb: #ffffff;
+  --background-rgb: #1e1e1e;
+  --accent-color: #63b7bb;
+  --selection-color: rgba(255, 255, 255, 0.2);
 }
 
 @keyframes blink {
@@ -18,10 +20,9 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  color: var(--foreground-rgb);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -42,13 +43,14 @@ body {
 }
 
 ::selection {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--selection-color);
 }
 
 .terminal-input {
   caret-color: transparent;
-  line-height: 1.2;
+  line-height: 1.5;
   font-size: 14px;
+  letter-spacing: 0.025em;
 }
 
 .cursor {
@@ -60,6 +62,7 @@ body {
 }
 
 .terminal-text {
-  line-height: 1.2;
+  line-height: 1.5;
   font-size: 14px;
+  letter-spacing: 0.025em;
 }
