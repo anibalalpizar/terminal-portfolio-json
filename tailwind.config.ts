@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      zIndex: {
+        "-10": "-10",
+      },
     },
   },
   plugins: [],
