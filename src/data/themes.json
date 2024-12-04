@@ -1,0 +1,30 @@
+{
+  "dark": {
+    "name": "Dark",
+    "background": "#1E1E1E",
+    "foreground": "#FFFFFF",
+    "accent": "#63B7BB",
+    "selection": "rgba(255, 255, 255, 0.2)"
+  },
+  "light": {
+    "name": "Light",
+    "background": "#FFFFFF",
+    "foreground": "#1E1E1E",
+    "accent": "#2563EB",
+    "selection": "rgba(37, 99, 235, 0.1)"
+  },
+  "matrix": {
+    "name": "Matrix",
+    "background": "#0D0208",
+    "foreground": "#00FF41",
+    "accent": "#008F11",
+    "selection": "rgba(0, 255, 65, 0.2)"
+  },
+  "retro": {
+    "name": "Retro",
+    "background": "#2B2B2B",
+    "foreground": "#33FF33",
+    "accent": "#FF3333",
+    "selection": "rgba(51, 255, 51, 0.2)"
+  }
+}
