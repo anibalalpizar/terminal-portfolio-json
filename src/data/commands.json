@@ -1,0 +1,9 @@
+{
+  "about": "Display information about me",
+  "projects": "Show my projects",
+  "skills": "List my technical skills",
+  "contact": "Display contact information",
+  "help": "Show available commands",
+  "clear": "Clear the terminal",
+  "theme": "Change terminal theme (usage: theme <name>). Available themes: dark, light, matrix, retro"
+}
