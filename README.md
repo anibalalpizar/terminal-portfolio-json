@@ -24,7 +24,7 @@ A customizable, interactive terminal-style portfolio website built with Next.js,
 
 ```bash
 git clone https://github.com/anibalalpizar/terminal-portfolio-json.git
-cd terminal-portfolio
+cd terminal-portfolio-json
 ```
 
 2. Install dependencies:
