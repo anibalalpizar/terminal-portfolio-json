@@ -63,7 +63,7 @@ The terminal supports the following commands:
 
 ### Portfolio Data
 
-Modify `src/data/portfolio.json` to update your personal information:
+Modify [`src/data/portfolio.json`](src/data/portfolio.json) to update your personal information:
 
 ```json
 {
