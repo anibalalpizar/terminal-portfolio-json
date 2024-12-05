@@ -5,7 +5,8 @@ export type Command =
   | "contact"
   | "help"
   | "clear"
-  | "theme";
+  | "theme"
+  | "game";
 
 export interface Theme {
   name: string;
@@ -30,4 +31,11 @@ export interface PortfolioData {
     github: string;
     linkedin: string;
   };
+}
+
+export interface GameState {
+  isPlaying: boolean;
+  targetNumber: number;
+  attempts: number;
+  maxAttempts: number;
 }
