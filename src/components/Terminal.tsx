@@ -6,6 +6,7 @@ import { TitleBar } from "./TitleBar";
 import { CommandLine } from "./CommandLine";
 import { TerminalOutput } from "./TerminalOutput";
 import { useTheme } from "@/hooks/useTheme";
+import { useGame } from "@/hooks/useGame";
 import portfolioData from "@/data/portfolio.json";
 import commands from "@/data/commands.json";
 
@@ -18,6 +19,7 @@ export function Terminal() {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const { theme, handleThemeChange } = useTheme();
+  const { startGame, makeGuess, isValidGuess } = useGame();
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,46 +37,56 @@ export function Terminal() {
     const [command, ...args] = cmd.trim().toLowerCase().split(" ");
     let output: string[] = [];
 
-    switch (command as Command) {
-      case "about":
-        output = [portfolioData.bio];
-        break;
-      case "projects":
-        output = portfolioData.projects.map(
-          (project) =>
-            `→ ${project.name}\n  ${project.description}\n  Link: ${project.link}`
-        );
-        break;
-      case "skills":
-        output = [
-          "Technical Skills:",
-          ...portfolioData.skills.map((skill) => `→ ${skill}`),
-        ];
-        break;
-      case "contact":
-        output = [
-          "Contact Information:",
-          `→ GitHub: ${portfolioData.socialLinks.github}`,
-          `→ LinkedIn: ${portfolioData.socialLinks.linkedin}`,
-        ];
-        break;
-      case "theme":
-        const [themeOutput] = handleThemeChange(args[0]);
-        output = themeOutput;
-        break;
-      case "help":
-        output = [
-          "Available commands:",
-          ...Object.entries(commands).map(([cmd, desc]) => `→ ${cmd}: ${desc}`),
-        ];
-        break;
-      case "clear":
-        setHistory([]);
-        return;
-      default:
-        output = [
-          `Command not found: ${cmd}. Type "help" for available commands.`,
-        ];
+    if (isValidGuess(command)) {
+      const [guessOutput] = makeGuess(Number(command));
+      output = guessOutput;
+    } else {
+      switch (command as Command) {
+        case "about":
+          output = [portfolioData.bio];
+          break;
+        case "projects":
+          output = portfolioData.projects.map(
+            (project) =>
+              `→ ${project.name}\n  ${project.description}\n  Link: ${project.link}`
+          );
+          break;
+        case "skills":
+          output = [
+            "Technical Skills:",
+            ...portfolioData.skills.map((skill) => `→ ${skill}`),
+          ];
+          break;
+        case "contact":
+          output = [
+            "Contact Information:",
+            `→ GitHub: ${portfolioData.socialLinks.github}`,
+            `→ LinkedIn: ${portfolioData.socialLinks.linkedin}`,
+          ];
+          break;
+        case "theme":
+          const [themeOutput] = handleThemeChange(args[0]);
+          output = themeOutput;
+          break;
+        case "game":
+          output = startGame();
+          break;
+        case "help":
+          output = [
+            "Available commands:",
+            ...Object.entries(commands).map(
+              ([cmd, desc]) => `→ ${cmd}: ${desc}`
+            ),
+          ];
+          break;
+        case "clear":
+          setHistory([]);
+          return;
+        default:
+          output = [
+            `Command not found: ${cmd}. Type "help" for available commands.`,
+          ];
+      }
     }
 
     setHistory((prev) => [...prev, `$ ${cmd}`, ...output]);
